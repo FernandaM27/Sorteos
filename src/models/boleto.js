@@ -19,6 +19,11 @@ const boletoSchema = new mongoose.Schema(
             ref: 'Sorteo',
             autopopulate: true,
         },
+        cliente :{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Cliente',
+            autopopulate: true,
+        }
     },
     { collection: 'boleto', versionKey: false }
 );
