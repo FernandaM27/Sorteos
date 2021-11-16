@@ -1,21 +1,22 @@
 const boleto = require('../models/boleto');
 
-const guardarBoleto = (req, res) => {
-    const numero = new boleto(req.body);
-
-    numero.save((err, numero) => {
-        if (err) {
-            res.status(500).json({
-                estatus: 'error',
-                mensaje: `Error al crear el boleto: ${err}`,
-            });
-        } else {
-            res.status(200).json({
-                estatus: 'success',
-                datos: numero,
-            });
-        }
-    });
+const crearBoletos = (numMin, numMax) => {
+    const boletos = [];
+    for (let i = numMin; i <= numMax; i++) {
+        const bol = new boleto({
+            numero: i,
+            comprobantePago: '',
+            tipoPago: '',
+            estadoBoleto: 'LIBRE',
+        });
+        bol.save((err) => {
+            if (err) {
+                throw new Error(err.message);
+            } 
+        });
+        boletos.push(bol);
+    }
+    return boletos;
 };
 
 const getBoletos = (req, res) => {
@@ -83,7 +84,7 @@ const actualizarBoleto = (req, res) => {
 };
 
 module.exports = {
-    guardarBoleto,
+    crearBoletos,
     getBoletos,
     getBoleto,
     eliminarBoleto,
