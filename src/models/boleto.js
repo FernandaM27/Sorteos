@@ -8,8 +8,9 @@ const boletoSchema = new mongoose.Schema(
         estadoBoleto: { type: String, required: true },
         movimientoBoleto: [
             {
-                fecha: { type: Date, required: false },
-                descripcion: { type: String, required: false },
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'MovimientoBoleto',
+                autopopulate: true,
             },
         ],
         persona: {
