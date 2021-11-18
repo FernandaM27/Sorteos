@@ -13,7 +13,6 @@ const sorteoSchema = new mongoose.Schema(
         imagen: { type: String, required: false },
         titulo: { type: String, required: true },
         descripcion: { type: String, required: true },
-        estado: { type: String, required: true },
         tiempoRecordatorio: { type: Number, required: true },
         estadoSorteo: { type: String, required: true },
         boletoGanador: {

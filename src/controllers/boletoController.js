@@ -1,10 +1,12 @@
 const boleto = require('../models/boleto');
 
 const crearBoletos = (numMin, numMax) => {
-    const boletos = [];
-    for (let i = numMin; i <= numMax; i++) {
+    const boletos = []; 
+    const num = numMax- numMin;
+    let aux = numMin;
+    for (let i = 0; i <= num; i++) {
         const bol = new boleto({
-            numero: i,
+            numero: aux,
             comprobantePago: '',
             tipoPago: '',
             estadoBoleto: 'LIBRE',
@@ -15,6 +17,7 @@ const crearBoletos = (numMin, numMax) => {
             } 
         });
         boletos.push(bol);
+        aux++;
     }
     return boletos;
 };
