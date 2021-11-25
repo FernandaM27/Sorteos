@@ -1,24 +1,5 @@
 const boleto = require('../models/boleto');
 
-const crearBoletos = (numMin, numMax) => {
-    const boletos = [];
-    for (let i = numMin; i <= numMax; i++) {
-        const bol = new boleto({
-            numero: i,
-            comprobantePago: '',
-            tipoPago: '',
-            estadoBoleto: 'LIBRE',
-        });
-        bol.save((err) => {
-            if (err) {
-                throw new Error(err.message);
-            } 
-        });
-        boletos.push(bol);
-    }
-    return boletos;
-};
-
 const getBoletos = (req, res) => {
     boleto.find((err, boletos) => {
         if (err) {
@@ -84,7 +65,6 @@ const actualizarBoleto = (req, res) => {
 };
 
 module.exports = {
-    crearBoletos,
     getBoletos,
     getBoleto,
     eliminarBoleto,

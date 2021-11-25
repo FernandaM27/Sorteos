@@ -2,7 +2,7 @@ const admin = require('../models/admin');
 
 const guardarAdmin = (req, res) => {
     const adm = new admin(req.body);
-    
+
     adm.save((err, admin) => {
         if (err) {
             res.status(500).json({
@@ -31,6 +31,18 @@ const getAdmins = (req, res) => {
                 data: admin,
             });
         }
+    });
+};
+
+const getAdminByEmail = (correo) => {
+    return new Promise((resolve, reject) => {
+        admin.findOne({ correo }, (err, admin) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(admin);
+            }
+        });
     });
 };
 
@@ -66,23 +78,23 @@ const eliminarAdmin = (req, res) => {
     });
 };
 
-const actualizarAdmin = (req, res) => {
-    admin.findByIdAndUpdate({ _id: req.params.id }, req.body, (err, admin) => {
-        if (err) {
-            res.status(400).json({
-                status: 'error',
-                message: `Error al actualizar el administrador: ${err}`,
-            });
-        } else {
-            res.status(200).json({
-                status: 'success',
-                data: admin,
-            });
+const actualizarAdmin = (id, administrador) => {
+    admin.findByIdAndUpdate(
+        { _id: id },
+        administrador,
+        { new: true },
+        (err, administrador) => {
+            if (err) {
+                return false;
+            } else {
+                return true;
+            }
         }
-    });
+    );
 };
 
 module.exports = {
+    getAdminByEmail,
     guardarAdmin,
     getAdmins,
     getAdmin,
