@@ -1,21 +1,33 @@
 {
-  "name": "sorteos",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "equipo2",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "jwt-decode": "^3.1.2",
-    "mongoose": "^6.0.12",
-    "nodemon": "^2.0.14"
-  }
+    "name": "sorteos",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon",
+        "test": "jest"
+    },
+    "author": "equipo2",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "eslint": "^8.3.0",
+        "express": "^4.17.1",
+        "jwt-decode": "^3.1.2",
+        "mongoose": "^6.0.12",
+        "nodemon": "^2.0.14"
+    },
+    "devDependencies": {
+        "jest": "^27.4.0"
+    },
+    "jest": {
+        "testEnvironment": "node"
+    },
+    "eslintConfig": {
+        "env": {
+            "jest": true
+        }
+    } 
 }
