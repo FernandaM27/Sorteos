@@ -6,7 +6,8 @@
     "scripts": {
         "start": "node src/index.js",
         "dev": "nodemon",
-        "test": "jest --verbose --watch"
+        "test": "jest --verbose", 
+        "test:watch": "npm run test -- --watch"
     },
     "author": "equipo2",
     "license": "ISC",
