@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node src/index.js",
         "dev": "nodemon",
-        "test": "jest"
+        "test": "jest --verbose --watch"
     },
     "author": "equipo2",
     "license": "ISC",
@@ -29,5 +29,5 @@
         "env": {
             "jest": true
         }
-    } 
+    }
 }
