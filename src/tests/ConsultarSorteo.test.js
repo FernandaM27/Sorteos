@@ -40,7 +40,6 @@ describe('Pruebas ConsultarSorteo', () => {
         const titulo = "?";
         const url = '/sorteoTitulo/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJQYWNvIiwiY29ycmVvIjoiMTIzNEBob3RtYWkuY29tIiwiZGlyZWNjaW9uIjoiYXNkIiwidGVsZWZvbm8iOiIxMjI0MTEzIiwiY2l1ZGFkIjoiTmFybmlhIiwiZXN0YWRvIjoiZGUgbWV4aWNvIiwic29ydGVvcyI6W119.SiUEOo9A-9FyBoOC-Pdc4I3pTUjwM3sjmYddyfieEHg/'+ titulo;
         const response = await api.get(url);
-        console.log(response.body);
         expect(response.body['data']).toBe(undefined);
     });
 

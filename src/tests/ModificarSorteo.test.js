@@ -1,5 +1,5 @@
 describe('Name of the group', () => {
-    test('should ', async () => {
-        
+    test('suma dos numeros ', () => {
+        expect(sum(2, 3)).toBe(4);        
     });
 });
