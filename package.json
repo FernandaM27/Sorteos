@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node src/index.js",
         "dev": "nodemon",
-        "test": "jest --verbose", 
+        "test": "jest --verbose",
         "test:watch": "npm run test -- --watch"
     },
     "author": "equipo2",
@@ -21,7 +21,8 @@
         "nodemon": "^2.0.14"
     },
     "devDependencies": {
-        "jest": "^27.4.0"
+        "jest": "^27.4.0",
+        "supertest": "^6.1.6"
     },
     "jest": {
         "testEnvironment": "node"

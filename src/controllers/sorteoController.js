@@ -25,7 +25,6 @@ const guardarSorteo = async (request, response) => {
 
 const getSorteos = (req, res) => {
     const token = req.params.token;
-    console.log(token);
     sorteo.find((err, sorteo) => {
         if (err) {
             res.status(400).json({
