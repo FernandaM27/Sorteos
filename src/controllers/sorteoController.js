@@ -1,5 +1,6 @@
 const sorteo = require('../models/sorteo');
 const { addSorteoToAdmin } = require('./utils/addSorteoToAdmin');
+const validacionesModificarSorteo = require('./utils/validacionesModificarSorteo');
 const { validateToken } = require('./utils/validateToken');
 
 const guardarSorteo = async (request, response) => {
@@ -72,7 +73,7 @@ const getSorteoTitulo = (req, res) => {
     validateToken(token).then((isValid) => {
         if (isValid) {
             sorteo.find(
-                { titulo: { $regex: '.*' + titulo + '.*' } },
+                { titulo: { $regex: titulo, $options: 'i' } },
                 (err, sorteos) => {
                     if (err) {
                         res.status(400).json({
@@ -140,36 +141,44 @@ const eliminarSorteo = (req, res) => {
 };
 
 const actualizarSorteo = (req, res) => {
-    const sorteo = req.body;
-    if (sorteo.tiempoRecordatorio > 2) {
+    if (validacionesModificarSorteo(req.body)) {
+        actualizar_sorteo(req, res);
+    } else {
         res.status(200).json({
             status: 'error',
             message: 'El tiempo de recordatorio no puede ser mayor a 2',
         });
-    } else {
-        validateToken(req.params.token).then((isValid) => {
-            if (isValid) {
-                sorteo.findByIdAndUpdate(
-                    { _id: req.params.id },
-                    req.body,
-                    { new: true },
-                    (err, sorteo) => {
-                        if (err) {
-                            res.status(400).json({
-                                status: 'error',
-                                message: `Error al actualizar el sorteo: ${err}`,
-                            });
-                        } else {
-                            res.status(200).json({
-                                status: 'success',
-                                data: sorteo,
-                            });
-                        }
-                    }
-                );
-            }
-        });
     }
+};
+
+const actualizar_sorteo = (req, res) => {
+    validateToken(req.params.token).then((isValid) => {
+        if (isValid) {
+            sorteo.findByIdAndUpdate(
+                { _id: req.params.id },
+                req.body,
+                { new: true },
+                (err, sorteo) => {
+                    if (err) {
+                        res.status(400).json({
+                            status: 'error',
+                            message: `Error al actualizar el sorteo: ${err}`,
+                        });
+                    } else {
+                        res.status(200).json({
+                            status: 'success',
+                            data: sorteo,
+                        });
+                    }
+                }
+            );
+        } else {
+            res.status(200).json({
+                status: 'error',
+                message: 'Token invalido',
+            });
+        }
+    });
 };
 
 module.exports = {

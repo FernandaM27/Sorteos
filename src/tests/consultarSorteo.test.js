@@ -1,9 +1,15 @@
 const supertest = require('supertest');
-const { server, mongo } = require('../index.js');
+const mongoose = require('mongoose');
+const { server } = require('../index.js');
 
 const api = supertest(server);
 
 describe('Pruebas ConsultarSorteo', () => {
+    afterAll(() => {
+        mongoose.connection.close();
+        server.close();
+    });
+
     test('Buscar sorteo por id', async () => {
         const id = '6196ad25c19acb5f185f23c0';
         const url =
@@ -58,36 +64,4 @@ describe('Pruebas ConsultarSorteo', () => {
         const response = await api.get(url);
         expect(response.body['data']).toBe(undefined);
     });
-});
-
-describe('Pruebas de modificar sorteo', () => {
-    test('Que el periodo de notificación no sea mayor a 2 días', async () => {
-        const id = '6196ad25c19acb5f185f23c0';
-        const url =
-            '/sorteo/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJQYWNvIiwiY29ycmVvIjoiMTIzNEBob3RtYWkuY29tIiwiZGlyZWNjaW9uIjoiYXNkIiwidGVsZWZvbm8iOiIxMjI0MTEzIiwiY2l1ZGFkIjoiTmFybmlhIiwiZXN0YWRvIjoiZGUgbWV4aWNvIiwic29ydGVvcyI6W119.SiUEOo9A-9FyBoOC-Pdc4I3pTUjwM3sjmYddyfieEHg/' +
-            id;
-
-        const response = await api.put(url).send({
-            numMin: 1,
-            numMax: 5,
-            precioNumeros: 40,
-            fechaInicioVenta: '2020-09-09T06:00:00.000Z',
-            fechaFinVenta: '2020-09-10T06:00:00.000Z',
-            fechaCreacion: '2020-09-09T06:00:00.000Z',
-            fechaSorteo: '2020-09-10T06:00:00.000Z',
-            diasLimiteApartado: 1,
-            titulo: 'test',
-            descripcion: 'SorteoCAmbiado',
-            estado: 'Libre',
-            tiempoRecordatorio: 3,
-            estadoSorteo: 'oycupasd',
-        });
-        const statusSorteo = response.body['status'];
-        expect(statusSorteo).toBe('error');
-    });
-});
-
-afterAll(() => {
-    mongo.connection.close();
-    server.close();
 });
