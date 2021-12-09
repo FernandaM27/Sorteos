@@ -36,7 +36,7 @@ describe('Pruebas de modificar sorteo', () => {
     });
 
     test('Modificar un sorteo con un id que no existe.', async () => {
-        const idNoExistente = '6asdad25c19acb5f185f23c0';
+        const idNoExistente = 'a';
         const url =
             '/sorteo/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJQYWNvIiwiY29ycmVvIjoiMTIzNEBob3RtYWkuY29tIiwiZGlyZWNjaW9uIjoiYXNkIiwidGVsZWZvbm8iOiIxMjI0MTEzIiwiY2l1ZGFkIjoiTmFybmlhIiwiZXN0YWRvIjoiZGUgbWV4aWNvIiwic29ydGVvcyI6W119.SiUEOo9A-9FyBoOC-Pdc4I3pTUjwM3sjmYddyfieEHg/' +
             idNoExistente;
@@ -54,6 +54,7 @@ describe('Pruebas de modificar sorteo', () => {
             descripcion: 'SorteoCAmbiado',
             estado: 'Libre',
             tiempoRecordatorio: 2,
+            imagen: '',
             estadoSorteo: 'vigente',
         });
         const statusSorteo = response.body['status'];
@@ -84,7 +85,7 @@ describe('Pruebas de modificar sorteo', () => {
     });
 
     test('Modificar sorteo con atributo erroneo', async () => {
-        const id = '61a5b2a90f08916869730afa';
+        const id = '61b1ca24e21381db527a4ef2';
         const url =
             '/sorteo/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJQYWNvIiwiY29ycmVvIjoiMTIzNEBob3RtYWkuY29tIiwiZGlyZWNjaW9uIjoiYXNkIiwidGVsZWZvbm8iOiIxMjI0MTEzIiwiY2l1ZGFkIjoiTmFybmlhIiwiZXN0YWRvIjoiZGUgbWV4aWNvIiwic29ydGVvcyI6W119.SiUEOo9A-9FyBoOC-Pdc4I3pTUjwM3sjmYddyfieEHg/' +
             id;
@@ -102,6 +103,7 @@ describe('Pruebas de modificar sorteo', () => {
             estado: 'Libre',
             tiempoRecordatorio: 2,
             estadoSorteo: 'vigente',
+            imagen: '',
             prueba: 'prueb',
             boletos: [],
         };
@@ -111,7 +113,7 @@ describe('Pruebas de modificar sorteo', () => {
     });
 
     test('Modificar sorteo con tipo de dato invalido en el precio', async () => {
-        const id = '61a5b2a90f08916869730afa';
+        const id = '61b1ca24e21381db527a4ef2';
         const url =
             '/sorteo/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJQYWNvIiwiY29ycmVvIjoiMTIzNEBob3RtYWkuY29tIiwiZGlyZWNjaW9uIjoiYXNkIiwidGVsZWZvbm8iOiIxMjI0MTEzIiwiY2l1ZGFkIjoiTmFybmlhIiwiZXN0YWRvIjoiZGUgbWV4aWNvIiwic29ydGVvcyI6W119.SiUEOo9A-9FyBoOC-Pdc4I3pTUjwM3sjmYddyfieEHg/' +
             id;
@@ -129,6 +131,7 @@ describe('Pruebas de modificar sorteo', () => {
             estado: 'Libre',
             tiempoRecordatorio: 2,
             estadoSorteo: 'vigente',
+            imagen: '',
             boletos: [],
         };
         const response = await api.put(url).send(data);
@@ -213,7 +216,7 @@ describe('Pruebas de modificar sorteo', () => {
     });
 
     test('no se pueda modificar el estado a “espera” si ya se tienen boletos vendidos.', async () => {
-        const id = '61a5b2a90f08916869730afa';
+        const id = '61b1ca24e21381db527a4ef2';
         const url =
             '/sorteo/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJQYWNvIiwiY29ycmVvIjoiMTIzNEBob3RtYWkuY29tIiwiZGlyZWNjaW9uIjoiYXNkIiwidGVsZWZvbm8iOiIxMjI0MTEzIiwiY2l1ZGFkIjoiTmFybmlhIiwiZXN0YWRvIjoiZGUgbWV4aWNvIiwic29ydGVvcyI6W119.SiUEOo9A-9FyBoOC-Pdc4I3pTUjwM3sjmYddyfieEHg/' +
             id;
@@ -231,6 +234,7 @@ describe('Pruebas de modificar sorteo', () => {
             estado: 'Libre',
             tiempoRecordatorio: 2,
             estadoSorteo: 'vigente',
+            imagen: '',
             boletos: [],
         };
 
