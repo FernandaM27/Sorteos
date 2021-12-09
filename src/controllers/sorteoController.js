@@ -1,14 +1,22 @@
 const sorteo = require('../models/sorteo');
 const { addSorteoToAdmin } = require('./utils/addSorteoToAdmin');
 const validacionesModificarSorteo = require('./utils/validacionesModificarSorteo');
+const guardarImagen = require('./utils/guardarImagen');
 const { validateToken } = require('./utils/validateToken');
 
 const guardarSorteo = async (request, response) => {
     const token = request.params.token;
+
+    let { imagen } = request.body;
+
+    if (imagen.trim() !== '') {
+        imagen = guardarImagen(imagen);
+    }
+
     const sort = new sorteo({
         ...request.body,
+        imagen,
     });
-
     sort.save((err) => {
         if (err) {
             response.status(400).json({
@@ -154,9 +162,13 @@ const actualizarSorteo = (req, res) => {
 const actualizar_sorteo = (req, res) => {
     validateToken(req.params.token).then((isValid) => {
         if (isValid) {
+            let { imagen } = req.body;
+            if (imagen.trim() !== '') {
+                imagen = guardarImagen(imagen);
+            }
             sorteo.findByIdAndUpdate(
                 { _id: req.params.id },
-                req.body,
+                { ...req.body, imagen },
                 { new: true },
                 (err, sorteo) => {
                     if (err) {
@@ -181,6 +193,7 @@ const actualizar_sorteo = (req, res) => {
     });
 };
 
+
 module.exports = {
     guardarSorteo,
     getSorteo,
@@ -188,5 +201,5 @@ module.exports = {
     getSorteoEstado,
     getSorteos,
     eliminarSorteo,
-    actualizarSorteo,
+    actualizarSorteo
 };

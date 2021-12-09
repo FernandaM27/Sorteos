@@ -11,7 +11,7 @@ describe('Pruebas ConsultarSorteo', () => {
     });
 
     test('Buscar sorteo por id', async () => {
-        const id = '6196ad25c19acb5f185f23c0';
+        const id = '61b1b602d1538f63db8555ae';
         const url =
             '/sorteo/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJQYWNvIiwiY29ycmVvIjoiMTIzNEBob3RtYWkuY29tIiwiZGlyZWNjaW9uIjoiYXNkIiwidGVsZWZvbm8iOiIxMjI0MTEzIiwiY2l1ZGFkIjoiTmFybmlhIiwiZXN0YWRvIjoiZGUgbWV4aWNvIiwic29ydGVvcyI6W119.SiUEOo9A-9FyBoOC-Pdc4I3pTUjwM3sjmYddyfieEHg/' +
             id;
